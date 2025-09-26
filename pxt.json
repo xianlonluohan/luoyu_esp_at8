@@ -1,0 +1,27 @@
+{
+    "name": "esp_at",
+    "version": "1.0.0",
+    "description": "Extension for Emakefun ESP-AT module",
+    "license": "MIT",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*"
+    },
+    "files": [
+        "README.md",
+        "main.blocks",
+        "main.ts",
+        "esp_at_stream_util.ts",
+        "_locales/zh/esp_at-jsdoc-strings.json",
+        "_locales/zh/esp_at-strings.json"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "public": true,
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj"
+}
