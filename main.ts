@@ -50,9 +50,11 @@ namespace emakefun {
     export function cancelSend(): boolean {
         basic.pause(30);
         serial.writeString("+++")
-        if (!emakefun.singleFindUtil("\r\nSEND Canceled\r\n", 500)) {
+        if (!emakefun.singleFindUtil("\r\nSEND Canceled\r\n", 100)) {
             // serial.writeLine("");
             // serial.readBuffer(0);
+            serial.writeString("\r\n");
+            serial.readBuffer(0);
             return false;
         }
         return true;
@@ -97,27 +99,26 @@ namespace emakefun {
     export function restart(timeout_ms: number): void {
         const end_time = input.runningTime() + timeout_ms;
         do {
-            serial.writeString("AT+RST" + "\r\n");
-            basic.pause(100);
-            basic.showString("!2:" + serial.readBuffer(0).toString());
-            basic.showString("!3:" + serial.readBuffer(0).toString());
-            basic.showString("!4:" + serial.readBuffer(0).toString());
-            basic.showString("!5:" + serial.readBuffer(0).toString());
-            cancelSend();
-            basic.pause(2000);
-            basic.showString("22");
+            // serial.writeString("AT+RST" + "\r\n");
+            // basic.showString("!2:" + serial.readBuffer(0).toString());
+            // basic.showString("!3:" + serial.readBuffer(0).toString());
+            // cancelSend();
+            // basic.pause(1000);
+            // basic.showString("22");
 
-            // if (!writeCommand("AT+RST", "\r\nOK\r\n", 1000)) {
-            //     basic.showNumber(11);
-            //     cancelSend();
-            //     continue;
-            // }
-            // if (!emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
-            //     basic.showNumber(12);
-            //     cancelSend();
-            //     continue;
+            if (!writeCommand("AT+RST", "\r\nOK\r\n", 1000)) {
+               
+                cancelSend();
+                 basic.showNumber(1);
+                continue;
+            }
+            if (!emakefun.singleFindUtil("\r\nready\r\n", 1000)) {
+                cancelSend();
+                 basic.showNumber(2);
+                continue;
 
-            // }
+            }
+            basic.showNumber(6);
             // if (!writeCommand("AT", "\r\nOK\r\n", 100)) {
             //     basic.showNumber(20)
             //     throw "Error: WiFi connection failed.";
