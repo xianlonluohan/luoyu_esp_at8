@@ -101,7 +101,7 @@ namespace emakefun {
             basic.showString("!3:" + serial.readBuffer(0).toString());
             basic.showString("!4:" + serial.readBuffer(0).toString());
             basic.showString("!5:" + serial.readBuffer(0).toString());
-
+            cancelSend();
             basic.pause(2000);
             basic.showString("22");
 
